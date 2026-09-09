@@ -181,6 +181,7 @@ const trips = [
         availableSeats: 50
     }
 ];
+
 // Fonction Menu 
 function Menu(){
     console.log(`
@@ -196,6 +197,45 @@ RAILWAY MANAGER
     console.log("7. Trier les trajets");
     console.log("0. Quitter ");
 };
+
+// fonction Afficher les trajets
+function Afficher_trajets(){
+    console.log(`=== TRAJETS DISPONIBLES === `)
+    for(i=0;i<trips.length;i++){
+        console.log(`
+        #${trips[i].id} ${trips[i].departure} → ${trips[i].destination}
+        Départ : ${trips[i].departureTime}
+        Arrivée : ${trips[i].arrivalTime}
+        Prix : ${trips[i].price} DH
+        Places disponibles : ${trips[i].availableSeats}`)
+    }
+};
+
+// Fonction Acheter un ticket
+const tickets=[];
+let ticketsid = 0;
+
+function ajouter_ticket(passengerName,tripId,tickets){
+    tickets.push({id:++ticketsid,seatNumber:50 - trips[tripId-1].availableSeats + 1,passengerName:passengerName,tripId:trips[tripId-1].id,price:trips[tripId-1].price})
+    trips[tripId-1].availableSeats--;
+    return tickets
+}
+function Acheter_ticket(){
+    var passengerName=prompt("entrez votre nom : ");
+    var tripId=Number(prompt("entrez l'identifiant du trajet : "));
+        if(tripId>trips.length){
+            console.log("Trajet introuvable. ")
+        }else if(tripId==trips[tripId-1].id){
+            if(trips[tripId-1].availableSeats==0){
+                console.log("Train complet. ")
+            }else{
+                ajouter_ticket(passengerName,tripId,tickets);
+        }
+    }
+};
+
+
+
 do{
     Menu();
     var choix=prompt("votre choix : ");
@@ -226,16 +266,3 @@ do{
 
 
 }while(choix!='0');
-
-// fonction Afficher les trajets
-function Afficher_trajets(){
-    console.log(`=== TRAJETS DISPONIBLES === `)
-    for(i=0;i<trips.length;i++){
-        console.log(`
-        #${trips[i].id} ${trips[i].departure} → ${trips[i].destination}
-        Départ : ${trips[i].departureTime}
-        Arrivée : ${trips[i].arrivalTime}
-        Prix : ${trips[i].price} DH
-        Places disponibles : ${trips[i].availableSeats}`)
-    }
-}
