@@ -277,6 +277,24 @@ function Annuler_ticket(){
             console.log("Ticket introuvable. ")
         }
     }
+};
+
+// fonction Rechercher un ticket
+function Rechercher_ticket(){
+    const nom_passager=prompt("Nom du passager :");
+    const result=tickets.filter((ticket) => {
+        return ticket.passengerName==nom_passager;
+    });
+    for(let i=0;i<result.length;i++){
+        var index=result[i].tripId;
+            console.log(`
+                Ticket #${result[i].id}
+                Passager : ${result[i].passengerName}
+                Trajet : ${trips[index-1].departure} → ${trips[index-1].destination}
+                Place : ${result[i].seatNumber}
+                Prix : ${result[i].price}
+                `)
+            }
 }
 
 do{
@@ -296,7 +314,7 @@ do{
             Annuler_ticket();
             break;
         case '5':
-            Rechercher_ticket();
+            Rechercher_ticket(tickets);
             break;
         case '6':
             Filtrer_trajets();
