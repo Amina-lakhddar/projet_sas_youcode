@@ -295,6 +295,19 @@ function Rechercher_ticket(){
                 Prix : ${result[i].price}
                 `)
             }
+};
+
+// Fonction Filtrer les trajets 
+function Filtrer_trajets(){
+    const nom_depart=prompt("Ville de départ :");
+    const resultat_ville=trips.filter(
+        (trip)=>{
+            return trip.departure==nom_depart
+        }
+    );
+    for(let i=0;i<resultat_ville.length;i++){
+        console.log(`${resultat_ville[i].departure} → ${resultat_ville[i].destination}: ${resultat_ville[i].price}`)
+    }
 }
 
 do{
