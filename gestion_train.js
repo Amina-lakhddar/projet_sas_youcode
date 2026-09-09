@@ -241,11 +241,15 @@ function Acheter_ticket(){
     }
 };
 
+// Afficher les tickets 
+
 function Afficher_tickets(){
-    console.log(`=== TICKETS === `);
+            console.log(`
+                === TICKETS === 
+                `);
     if(tickets.length>0){
         for(i=0;i<tickets.length;i++){
-            let index=tickets[i].tripId;
+            var index=tickets[i].tripId;
             console.log(`
                 Ticket #${tickets[i].id}
                 Passager : ${tickets[i].passengerName}
@@ -260,7 +264,20 @@ function Afficher_tickets(){
     }
 }
 
-
+//  Annuler un ticket 
+function Annuler_ticket(){
+    const id_ticket=Number(prompt(" Identifiant du ticket "));
+    for(let i=0 ;i<tickets.length;i++){
+        if(tickets[i].id==id_ticket){
+            console.log("Ticket annulé avec succès.");
+            trips[(tickets[i].tripId)-1].availableSeats++;
+            tickets.splice(i,1);
+        }
+        else{
+            console.log("Ticket introuvable. ")
+        }
+    }
+}
 
 do{
     Menu();
