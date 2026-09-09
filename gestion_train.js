@@ -216,7 +216,13 @@ const tickets=[];
 let ticketsid = 0;
 
 function ajouter_ticket(passengerName,tripId,tickets){
-    tickets.push({id:++ticketsid,seatNumber:50 - trips[tripId-1].availableSeats + 1,passengerName:passengerName,tripId:trips[tripId-1].id,price:trips[tripId-1].price})
+    tickets.push({
+        id:++ticketsid,
+        seatNumber:50 - trips[tripId-1].availableSeats + 1,
+        passengerName:passengerName,
+        tripId:trips[tripId-1].id,
+        price:trips[tripId-1].price
+    });
     trips[tripId-1].availableSeats--;
     return tickets
 }
@@ -230,9 +236,29 @@ function Acheter_ticket(){
                 console.log("Train complet. ")
             }else{
                 ajouter_ticket(passengerName,tripId,tickets);
+                console.log("Ticket acheté avec succès.");
         }
     }
 };
+
+function Afficher_tickets(){
+    console.log(`=== TICKETS === `);
+    if(tickets.length>0){
+        for(i=0;i<tickets.length;i++){
+            let index=tickets[i].tripId;
+            console.log(`
+                Ticket #${tickets[i].id}
+                Passager : ${tickets[i].passengerName}
+                Trajet : ${trips[index-1].departure} → ${trips[index-1].destination}
+                Place : ${tickets[i].seatNumber}
+                Prix : ${tickets[i].price}
+                `)
+        }
+    }
+    else{
+        console.log("Aucun ticket enregistré. ")
+    }
+}
 
 
 
