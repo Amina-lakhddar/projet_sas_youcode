@@ -195,6 +195,7 @@ RAILWAY MANAGER
     console.log("5. Rechercher un ticket ");
     console.log("6. Filtrer les trajets ");
     console.log("7. Trier les trajets");
+    console.log("8. Nombre total de tickets vendus")
     console.log("0. Quitter ");
 };
 
@@ -216,13 +217,14 @@ const tickets=[];
 let ticketsid = 0;
 
 function ajouter_ticket(passengerName,tripId,tickets){
-    tickets.push({
+    const objet = {
         id:++ticketsid,
         seatNumber:50 - trips[tripId-1].availableSeats + 1,
         passengerName:passengerName,
         tripId:trips[tripId-1].id,
         price:trips[tripId-1].price
-    });
+    }
+    tickets.push(objet);
     trips[tripId-1].availableSeats--;
     return tickets
 }
@@ -332,7 +334,11 @@ function Trier_trajets(){
         console.log(`${table_trajets[i].departure} → ${table_trajets[i].destination} : ${table_trajets[i].price}`);
     }
 };
-
+// Nombre total de tickets vendus 
+function total_tickets(){
+    let total=tickets.length;
+    console.log(`Nombre total de tickets : ${total}`)
+}
 
 do{
     Menu();
@@ -356,8 +362,11 @@ do{
         case '6':
             Filtrer_trajets();
             break;
-        default:
+        case '7':
             Trier_trajets();
+            break;
+        default:
+            total_tickets();
             break;
 
     }
