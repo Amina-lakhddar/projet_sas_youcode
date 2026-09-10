@@ -195,7 +195,8 @@ RAILWAY MANAGER
     console.log("5. Rechercher un ticket ");
     console.log("6. Filtrer les trajets ");
     console.log("7. Trier les trajets");
-    console.log("8. Nombre total de tickets vendus")
+    console.log("8. Nombre total de tickets vendus");
+    console.log("9. Chiffre d'affaires total");
     console.log("0. Quitter ");
 };
 
@@ -338,6 +339,15 @@ function Trier_trajets(){
 function total_tickets(){
     let total=tickets.length;
     console.log(`Nombre total de tickets : ${total}`)
+};
+
+// Fonction Chiffre d'affaires total
+function chiffre_affaires(){
+    let chiffre=0;
+    for(let i=0;i<tickets.length;i++){
+        chiffre=chiffre+tickets[i].price;
+    }
+    console.log(`Chiffre d'affaires total : ${chiffre} DH`)
 }
 
 do{
@@ -365,8 +375,11 @@ do{
         case '7':
             Trier_trajets();
             break;
-        default:
+        case '8':
             total_tickets();
+            break;
+        default:
+            chiffre_affaires();
             break;
 
     }
