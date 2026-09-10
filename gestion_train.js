@@ -308,7 +308,31 @@ function Filtrer_trajets(){
     for(let i=0;i<resultat_ville.length;i++){
         console.log(`${resultat_ville[i].departure} → ${resultat_ville[i].destination}: ${resultat_ville[i].price}`)
     }
-}
+};
+
+//Function Trier les trajets
+const table_trajets=[];
+function Trier_trajets(){
+    for(let i=0;i<trips.length;i++){
+        table_trajets.push(trips[i]);
+    }
+    let max;
+    for(let j=0;j<table_trajets.length-1;j++){
+        for(let i=0;i<table_trajets.length-1;i++){
+            if(table_trajets[i+1].price<table_trajets[i].price){
+                max=table_trajets[i];
+                table_trajets[i]=table_trajets[i+1];
+                table_trajets[i+1]=max;
+            }
+            
+        }
+    
+    }
+    for(let i=0;i<table_trajets.length;i++){
+        console.log(`${table_trajets[i].departure} → ${table_trajets[i].destination} : ${table_trajets[i].price}`);
+    }
+};
+
 
 do{
     Menu();
